@@ -5,22 +5,31 @@ import {
   Calendar, 
   MessageSquare, 
   FileText, 
-  Settings,
-  ShieldCheck,
-  Building
+  Settings, 
+  ShieldCheck, 
+  Building, 
+  CalendarClock 
 } from 'lucide-react';
-import { NavItem, StudentRecord } from './types';
+import { NavItem, StudentRecord, Teacher } from './types';
 
 export const NAV_ITEMS: NavItem[] = [
   { id: 'dashboard', labelEn: 'Dashboard', labelZh: '仪表盘', icon: LayoutDashboard },
   { id: 'students', labelEn: 'Students & Profiles', labelZh: '学生档案', icon: Users },
   { id: 'academics', labelEn: 'Academic Records', labelZh: '学术管理', icon: BookOpen },
+  { id: 'consultations', labelEn: '1-1 Consultation', labelZh: '一对一咨询', icon: CalendarClock },
   { id: 'timetable', labelEn: 'Timetable', labelZh: '课程表', icon: Calendar },
   { id: 'attendance', labelEn: 'Attendance', labelZh: '出勤管理', icon: ShieldCheck },
   { id: 'hostel', labelEn: 'Hostel', labelZh: '宿舍管理', icon: Building },
   { id: 'reports', labelEn: 'Reports', labelZh: '报告生成', icon: FileText },
   { id: 'messages', labelEn: 'Messages', labelZh: '消息中心', icon: MessageSquare },
   { id: 'settings', labelEn: 'Settings', labelZh: '系统设置', icon: Settings },
+];
+
+export const MOCK_TEACHERS: Teacher[] = [
+  { id: 'T001', name: 'Mrs. Sarah Anderson', subject: 'Mathematics', avatar: 'https://picsum.photos/id/40/200/200', officeLocation: 'Room 304, Block A', availableDays: [1, 3, 5] },
+  { id: 'T002', name: 'Mr. John Smith', subject: 'Physics', avatar: 'https://picsum.photos/id/55/200/200', officeLocation: 'Science Lab 2', availableDays: [2, 4] },
+  { id: 'T003', name: 'Ms. Emily Blunt', subject: 'English Literature', avatar: 'https://picsum.photos/id/65/200/200', officeLocation: 'Library Office', availableDays: [1, 2, 3, 4, 5] },
+  { id: 'T004', name: 'Dr. Alan Grant', subject: 'History', avatar: 'https://picsum.photos/id/75/200/200', officeLocation: 'Room 102, Block B', availableDays: [3, 5] },
 ];
 
 export const MOCK_STUDENTS: StudentRecord[] = [
@@ -195,7 +204,6 @@ export const UI_LABELS = {
     offline: 'Offline',
     noMessages: 'No messages yet',
     selectConversation: 'Select a conversation to start messaging',
-    // New Labels for Academic Records & Insights
     activeSubjects: 'Active Subjects',
     needsAttention: 'Needs Attention',
     exportGrades: 'Export Grades',
@@ -216,26 +224,34 @@ export const UI_LABELS = {
     subject: 'Subject',
     date: 'Date',
     grade: 'Grade',
-    // Reports Preview
     preview: 'Preview',
     reportPreview: 'Report Preview',
     close: 'Close',
     print: 'Print',
     behaviorReport: 'Behavior Report',
-    // Monthly Management
     manageMonthly: 'Manage Monthly Exams',
     monthlyBreakdown: 'Monthly Exam Breakdown',
     month: 'Month',
     enterScore: 'Enter Score',
     totalCalculated: 'Total Score (Avg)',
     addComment: 'Add Comment',
-    // Report Card Specific
     semesterReport: 'Semester Report Card',
     generatedOn: 'Generated on',
     principalSignature: 'Principal Signature',
     classTeacherSignature: 'Class Teacher Signature',
     schoolHeader: 'Smart SIS High School',
     commentsSection: 'Teacher Comments & Remarks',
+    // Consultations
+    consultationTitle: '1-1 Consultation',
+    selectTeacher: 'Select a Teacher',
+    selectDateTime: 'Select a Date & Time',
+    availableSlots: 'Available Slots',
+    confirmBooking: 'Confirm',
+    duration: '30 min',
+    location: 'Location',
+    bookingConfirmed: 'Booking Confirmed!',
+    bookingSubtitle: 'Your session has been scheduled successfully.',
+    backToTeachers: 'Back to Teachers',
   },
   zh: {
     welcome: '欢迎回来',
@@ -311,7 +327,6 @@ export const UI_LABELS = {
     offline: '离线',
     noMessages: '暂无消息',
     selectConversation: '选择一个对话开始聊天',
-    // New Labels for Academic Records & Insights
     activeSubjects: '活跃科目',
     needsAttention: '需关注',
     exportGrades: '导出成绩',
@@ -332,25 +347,33 @@ export const UI_LABELS = {
     subject: '科目',
     date: '日期',
     grade: '等级',
-    // Reports Preview
     preview: '预览',
     reportPreview: '报告预览',
     close: '关闭',
     print: '打印',
     behaviorReport: '行为报告',
-    // Monthly Management
     manageMonthly: '月考管理',
     monthlyBreakdown: '月考成绩详情',
     month: '月份',
     enterScore: '输入分数',
     totalCalculated: '总成绩 (平均)',
     addComment: '添加评语',
-    // Report Card Specific
     semesterReport: '学期成绩报告单',
     generatedOn: '生成日期',
     principalSignature: '校长签名',
     classTeacherSignature: '班主任签名',
     schoolHeader: 'Smart SIS 高级中学',
     commentsSection: '教师评语与备注',
+    // Consultations
+    consultationTitle: '1-1 Consultation',
+    selectTeacher: 'Select a Teacher',
+    selectDateTime: 'Select a Date & Time',
+    availableSlots: 'Available Slots',
+    confirmBooking: 'Confirm',
+    duration: '30 min',
+    location: 'Location',
+    bookingConfirmed: 'Booking Confirmed!',
+    bookingSubtitle: 'Your session has been scheduled successfully.',
+    backToTeachers: 'Back to Teachers',
   }
 };

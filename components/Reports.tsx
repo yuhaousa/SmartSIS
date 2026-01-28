@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
 import { UI_LABELS } from '../constants';
-import { FileText, Download, PieChart, TrendingUp, BarChart, Clock, CheckCircle, Loader2, Eye, X, Printer, MapPin, AlertTriangle } from 'lucide-react';
+import { FileText, Download, PieChart, TrendingUp, BarChart, Clock, CheckCircle, Loader2, Eye, X, Printer, AlertTriangle } from 'lucide-react';
 
 interface ReportsProps {
   language: Language;
@@ -26,6 +26,23 @@ const Reports: React.FC<ReportsProps> = ({ language }) => {
     { id: 4, name: 'Annual Financial Overview', type: 'Finance', date: '2023-12-15', status: 'Ready', size: '5.8 MB' },
     { id: 5, name: 'Student Conduct Report', type: 'Behavior', date: '2023-12-10', status: 'Ready', size: '1.5 MB' },
   ];
+
+  const handleGeneratePreview = (typeId: string) => {
+    const typeMapping: Record<string, string> = {
+      'academic': 'Academic',
+      'attendance': 'Attendance',
+      'hostel': 'Hostel',
+      'finance': 'Finance',
+      'behavior': 'Behavior'
+    };
+
+    setPreviewReport({
+      name: `${typeMapping[typeId]} Report Preview`,
+      type: typeMapping[typeId],
+      date: new Date().toLocaleDateString(language === 'en' ? 'en-US' : 'zh-CN'),
+      status: 'Preview'
+    });
+  };
 
   // Mock content generator for preview
   const renderReportContent = (report: any) => {
@@ -257,6 +274,7 @@ const Reports: React.FC<ReportsProps> = ({ language }) => {
         {reportTypes.map((type) => (
           <button
             key={type.id}
+            onClick={() => handleGeneratePreview(type.id)}
             className="bg-white overflow-hidden shadow rounded-lg p-5 flex items-center hover:shadow-md transition-shadow text-left w-full group"
           >
             <div className={`flex-shrink-0 rounded-md p-3 ${type.color} group-hover:scale-110 transition-transform`}>
@@ -355,7 +373,7 @@ const Reports: React.FC<ReportsProps> = ({ language }) => {
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="flex justify-between items-center mb-5 border-b border-gray-200 pb-3">
                   <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                    {t.reportPreview}
+                    {t.reportPreview} {previewReport.status === 'Preview' && '(Sample)'}
                   </h3>
                   <button 
                     onClick={() => setPreviewReport(null)}

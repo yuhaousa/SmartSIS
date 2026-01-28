@@ -35,6 +35,15 @@ export interface StudentRecord extends Student {
   activities: string[];
 }
 
+export interface Teacher {
+  id: string;
+  name: string;
+  subject: string;
+  avatar: string;
+  officeLocation: string;
+  availableDays: number[]; // 0-6 (Sun-Sat)
+}
+
 export interface NavItem {
   id: string;
   labelEn: string;
