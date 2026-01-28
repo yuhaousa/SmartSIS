@@ -15,11 +15,19 @@ export interface Student {
   status: 'Active' | 'Inactive';
 }
 
+export interface MonthlyScore {
+  month: string;
+  score: number;
+  comment?: string; // Teacher's comment for the specific month
+}
+
 export interface ExamResult {
   subject: string;
-  score: number;
+  score: number; // This acts as the Semester Total/Average
+  monthlyScores?: MonthlyScore[]; // New field for monthly breakdown
   date: string;
   teacherComment: string;
+  semester: string;
 }
 
 export interface StudentRecord extends Student {

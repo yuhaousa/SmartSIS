@@ -36,9 +36,33 @@ export const MOCK_STUDENTS: StudentRecord[] = [
     expectedGraduationDate: '2025-06-30',
     status: 'Active',
     results: [
-      { subject: 'Mathematics', score: 92, date: '2023-12-15', teacherComment: 'Alice shows exceptional problem-solving skills, particularly in calculus.' },
-      { subject: 'History', score: 85, date: '2023-12-18', teacherComment: 'Good understanding of historical contexts, but needs to improve essay structure.' },
-      { subject: 'Science', score: 88, date: '2023-12-20', teacherComment: 'Consistently performs well in lab experiments.' }
+      { 
+        semester: 'Fall 2023', 
+        subject: 'Mathematics', 
+        score: 92, 
+        monthlyScores: [
+          { month: 'September', score: 88, comment: 'Great start!' },
+          { month: 'October', score: 94, comment: 'Improved significantly.' },
+          { month: 'November', score: 94 },
+          { month: 'December', score: 92, comment: 'Consistent performance.' }
+        ],
+        date: '2023-12-15', 
+        teacherComment: 'Alice shows exceptional problem-solving skills, particularly in calculus.' 
+      },
+      { 
+        semester: 'Fall 2023', 
+        subject: 'History', 
+        score: 85, 
+        monthlyScores: [
+          { month: 'September', score: 82, comment: 'Needs more detail in essays.' },
+          { month: 'October', score: 85 },
+          { month: 'November', score: 88, comment: 'Much better analysis.' }
+        ],
+        date: '2023-12-18', 
+        teacherComment: 'Good understanding of historical contexts, but needs to improve essay structure.' 
+      },
+      { semester: 'Spring 2024', subject: 'Science', score: 88, monthlyScores: [{ month: 'Feb', score: 88 }], date: '2024-05-20', teacherComment: 'Consistently performs well in lab experiments.' },
+      { semester: 'Spring 2024', subject: 'Mathematics', score: 95, monthlyScores: [{ month: 'Feb', score: 95 }], date: '2024-05-22', teacherComment: 'Perfect score in final algebra test.' }
     ],
     activities: ['Debate Club', 'Swimming Team']
   },
@@ -54,8 +78,9 @@ export const MOCK_STUDENTS: StudentRecord[] = [
     expectedGraduationDate: '2024-06-30',
     status: 'Active',
     results: [
-      { subject: 'Mathematics', score: 78, date: '2023-12-15', teacherComment: 'Michael is making steady progress but struggles with algebraic concepts.' },
-      { subject: 'History', score: 95, date: '2023-12-18', teacherComment: 'Outstanding performance. His analysis of the industrial revolution was insightful.' }
+      { semester: 'Fall 2023', subject: 'Mathematics', score: 78, monthlyScores: [{ month: 'Sep', score: 75, comment: 'struggling with algebra' }, { month: 'Oct', score: 81 }], date: '2023-12-15', teacherComment: 'Michael is making steady progress but struggles with algebraic concepts.' },
+      { semester: 'Fall 2023', subject: 'History', score: 95, monthlyScores: [{ month: 'Sep', score: 92 }, { month: 'Oct', score: 98 }], date: '2023-12-18', teacherComment: 'Outstanding performance. His analysis of the industrial revolution was insightful.' },
+      { semester: 'Spring 2024', subject: 'Mathematics', score: 82, monthlyScores: [{ month: 'Feb', score: 82 }], date: '2024-05-15', teacherComment: 'Showed improvement in geometry.' }
     ],
     activities: ['Chess Club']
   },
@@ -71,8 +96,8 @@ export const MOCK_STUDENTS: StudentRecord[] = [
     expectedGraduationDate: '2025-06-30',
     status: 'Active',
     results: [
-      { subject: 'Mathematics', score: 88, date: '2023-12-15', teacherComment: 'Sarah participates actively in class and helps her peers.' },
-      { subject: 'Science', score: 91, date: '2023-12-20', teacherComment: 'Excellent attention to detail in biology.' }
+      { semester: 'Fall 2023', subject: 'Mathematics', score: 88, monthlyScores: [{ month: 'Sep', score: 88 }], date: '2023-12-15', teacherComment: 'Sarah participates actively in class and helps her peers.' },
+      { semester: 'Fall 2023', subject: 'Science', score: 91, monthlyScores: [{ month: 'Sep', score: 91 }], date: '2023-12-20', teacherComment: 'Excellent attention to detail in biology.' }
     ],
     activities: ['Drama Club', 'Choir']
   },
@@ -88,7 +113,8 @@ export const MOCK_STUDENTS: StudentRecord[] = [
     expectedGraduationDate: '2023-06-30',
     status: 'Active',
     results: [
-      { subject: 'Mathematics', score: 98, date: '2023-12-15', teacherComment: 'A perfect score. David is ready for university-level mathematics.' }
+      { semester: 'Fall 2023', subject: 'Mathematics', score: 98, monthlyScores: [{ month: 'Sep', score: 98 }, { month: 'Oct', score: 98 }], date: '2023-12-15', teacherComment: 'A perfect score. David is ready for university-level mathematics.' },
+      { semester: 'Spring 2024', subject: 'Mathematics', score: 99, monthlyScores: [{ month: 'Feb', score: 99 }], date: '2024-05-15', teacherComment: 'Continues to dominate the leaderboard.' }
     ],
     activities: ['Robotics', 'Student Council']
   }
@@ -182,6 +208,34 @@ export const UI_LABELS = {
     insightHistory: 'History scores have improved by 5% compared to last month.',
     insightScience: 'Science practicals are scheduled for next week.',
     semesterSuffix: 'this semester',
+    exportCSV: 'Export CSV',
+    semester: 'Semester',
+    allSemesters: 'All Semesters',
+    backToRecords: 'Back to Records',
+    studentAcademicProfile: 'Academic Profile',
+    subject: 'Subject',
+    date: 'Date',
+    grade: 'Grade',
+    // Reports Preview
+    preview: 'Preview',
+    reportPreview: 'Report Preview',
+    close: 'Close',
+    print: 'Print',
+    behaviorReport: 'Behavior Report',
+    // Monthly Management
+    manageMonthly: 'Manage Monthly Exams',
+    monthlyBreakdown: 'Monthly Exam Breakdown',
+    month: 'Month',
+    enterScore: 'Enter Score',
+    totalCalculated: 'Total Score (Avg)',
+    addComment: 'Add Comment',
+    // Report Card Specific
+    semesterReport: 'Semester Report Card',
+    generatedOn: 'Generated on',
+    principalSignature: 'Principal Signature',
+    classTeacherSignature: 'Class Teacher Signature',
+    schoolHeader: 'Smart SIS High School',
+    commentsSection: 'Teacher Comments & Remarks',
   },
   zh: {
     welcome: '欢迎回来',
@@ -270,5 +324,33 @@ export const UI_LABELS = {
     insightHistory: '历史成绩比上个月提高了 5%。',
     insightScience: '科学实验课安排在下周。',
     semesterSuffix: '',
+    exportCSV: '导出 CSV',
+    semester: '学期',
+    allSemesters: '所有学期',
+    backToRecords: '返回列表',
+    studentAcademicProfile: '学生成绩档案',
+    subject: '科目',
+    date: '日期',
+    grade: '等级',
+    // Reports Preview
+    preview: '预览',
+    reportPreview: '报告预览',
+    close: '关闭',
+    print: '打印',
+    behaviorReport: '行为报告',
+    // Monthly Management
+    manageMonthly: '月考管理',
+    monthlyBreakdown: '月考成绩详情',
+    month: '月份',
+    enterScore: '输入分数',
+    totalCalculated: '总成绩 (平均)',
+    addComment: '添加评语',
+    // Report Card Specific
+    semesterReport: '学期成绩报告单',
+    generatedOn: '生成日期',
+    principalSignature: '校长签名',
+    classTeacherSignature: '班主任签名',
+    schoolHeader: 'Smart SIS 高级中学',
+    commentsSection: '教师评语与备注',
   }
 };

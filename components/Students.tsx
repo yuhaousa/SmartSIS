@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { MOCK_STUDENTS, UI_LABELS } from '../constants';
 import { Language, StudentRecord } from '../types';
 import { translateText } from '../services/geminiService';
-import { Search, MapPin, Mail, Phone, Languages, Users, ChevronRight, ArrowLeft, Filter } from 'lucide-react';
+import { Search, MapPin, Mail, Phone, Languages, Users, ChevronRight, ArrowLeft, Filter, Download } from 'lucide-react';
 
 interface StudentsProps {
   language: Language;
@@ -50,6 +50,34 @@ const Students: React.FC<StudentsProps> = ({ language }) => {
     
     return matchesSearch && matchesClass && matchesGrade && matchesStatus;
   });
+
+  const handleExportCSV = () => {
+    const headers = [t.name, t.studentId, t.email, t.className, t.enrollmentDate, t.expectedGraduationDate, t.status];
+    const csvContent = [
+      headers.join(','),
+      ...filteredStudents.map(student => [
+        `"${student.name}"`,
+        `"${student.id}"`,
+        `"${student.email}"`,
+        `"${student.className}"`,
+        `"${student.enrollmentDate}"`,
+        `"${student.expectedGraduationDate}"`,
+        `"${student.status}"`
+      ].join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', `students_export_${new Date().toISOString().split('T')[0]}.csv`);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
 
   if (selectedStudent) {
     return (
@@ -188,7 +216,7 @@ const Students: React.FC<StudentsProps> = ({ language }) => {
             />
           </div>
           
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 items-center">
              {/* Class Filter */}
              <div className="flex items-center space-x-2">
                <span className="text-sm text-gray-500 flex items-center"><Filter className="h-3 w-3 mr-1"/> Class:</span>
@@ -224,6 +252,15 @@ const Students: React.FC<StudentsProps> = ({ language }) => {
                  {uniqueStatuses.map(s => <option key={s} value={s}>{s === 'All' ? 'All Status' : s}</option>)}
                </select>
              </div>
+
+             {/* Export Button */}
+             <button
+                onClick={handleExportCSV}
+                className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+             >
+                <Download className="-ml-1 mr-2 h-4 w-4 text-gray-500" />
+                {t.exportCSV}
+             </button>
           </div>
         </div>
       </div>
