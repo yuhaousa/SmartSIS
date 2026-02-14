@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
@@ -13,6 +14,8 @@ import Login from './components/Login';
 import Reports from './components/Reports';
 import Messages from './components/Messages';
 import Consultations from './components/Consultations';
+import UniversityApplications from './components/UniversityApplications';
+import UniversityManagement from './components/UniversityManagement';
 import { Language } from './types';
 
 const App: React.FC = () => {
@@ -38,6 +41,10 @@ const App: React.FC = () => {
         return <Students language={language} />;
       case 'academics':
         return <AcademicRecords language={language} />;
+      case 'university_management':
+        return <UniversityManagement language={language} />;
+      case 'university_apps':
+        return <UniversityApplications language={language} />;
       case 'consultations':
         return <Consultations language={language} />;
       case 'timetable':
